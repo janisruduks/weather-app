@@ -1,0 +1,43 @@
+.menu__items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #333;
+    border-radius: 33px;
+    font-weight: 400;
+    font-size: x-small;
+}
+
+.menu__info {
+    text-align: center;
+    padding: 1rem;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: fade-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out forwards;
+}
+
+.menu__info__disable {
+    display: none;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+
+
