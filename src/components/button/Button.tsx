@@ -12,7 +12,7 @@ const Button = ({ children, type, onClick, customClass }: ButtonProps) => {
     <div>
       <button
         className={
-          (type === "primary" ? "primary" : "secondary") + " " + customClass
+          (type === "primary" ? "primary" : "secondary") + " button-content-wrapper " + customClass
         }
         onClick={onClick}
       >

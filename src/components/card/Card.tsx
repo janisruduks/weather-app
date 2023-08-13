@@ -1,13 +1,11 @@
 "use client";
 import "./styles.css";
-import {
-    TiWeatherPartlySunny,
-    TiWeatherWindy,
-    TiWeatherDownpour,
-} from "react-icons/ti";
-import { TbTemperatureCelsius } from "react-icons/tb";
+
+import { TiWeatherPartlySunny, TiWeatherWindy } from "react-icons/ti";
+import { TbTemperatureCelsius, TbBrandGithub } from "react-icons/tb";
 import { useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 import Button from "../button/Button";
 import ToggleButton from "../toggle-button/ToggleButton";
@@ -40,22 +38,24 @@ type Weather = {
 };
 
 const Card = () => {
-    const [searchCity, setSearchCity] = useState<string>("");
     const [cityData, setCityData] = useState<City>();
     const [weatherData, setWeatherData] = useState<Weather>();
     const [loading, setLoading] = useState<boolean>(false);
+    const [errorShake, setErrorShake] = useState<boolean>(false);
 
     const handleInputData = (city: string) => {
-        setSearchCity(city);
+        setErrorShake(false);
         getCities(city);
     };
 
     const getCities = async (city: string) => {
+        if (city === "") return;
         const cities = axios.get(
             `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`
         );
         cities.then((res) => {
             const result: CityResult = res.data;
+            if (result.results === undefined) return setErrorShake(true);
             setCityData(result.results[0]);
             getWeather(result.results[0].latitude, result.results[0].longitude);
         });
@@ -75,11 +75,11 @@ const Card = () => {
 
     return (
         <main className="card-box box__shadow">
-                <div className="card__title">
-                    <h1>Weather app demo</h1>
-                </div>
+            <div className="card__title">
+                <h1>Weather app demo</h1>
+            </div>
             <div className="card__padding">
-                <SearchBar getCity={handleInputData} />
+                <SearchBar shake={errorShake} getCity={handleInputData} />
                 <div className="card__menu">
                     <ToggleButton
                         text={weatherData?.temperature + "°C"}
@@ -106,19 +106,38 @@ const Card = () => {
                         <div>
                             <h1>Weather in {cityData?.name}</h1>
                             <p>
-                                Today in {cityData?.name} it is {weatherData?.temperature}°C
-                                and the wind is blowing at {weatherData?.windspeed}Km/h
-                                from {weatherData?.winddirection}° direction.
+                                Today in {cityData?.name} it is{" "}
+                                {weatherData?.temperature}°C
                             </p>
+                            <p>
+                                wind is blowing at {weatherData?.windspeed}Km/h
+                            </p>
+                            <p>from {weatherData?.winddirection}° direction.</p>
                         </div>
                     ) : (
-                        <p></p>
+                        <p>No data availabe, search for city.</p>
                     )}
                 </div>
+                <hr />
                 <div className="card__content__buttons">
-                    <Button type="primary">Primary button</Button>
-                    <p>Hello world</p>
-                    <Button>Regular button</Button>
+                    <Button>
+                        <TbBrandGithub size="1.3rem" />
+                        <Link
+                            href="https://github.com/janisruduks/weather-app"
+                            target="__blank"
+                        >
+                            Star on GitHub
+                        </Link>
+                    </Button>
+                    <Button>
+                        <TbBrandGithub size="1.3rem" />
+                        <Link
+                            href="https://github.com/janisruduks?tab=repositories"
+                            target="__blank"
+                        >
+                            Checkout other projects
+                        </Link>
+                    </Button>
                 </div>
             </div>
         </main>

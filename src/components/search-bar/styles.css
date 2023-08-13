@@ -1,13 +1,14 @@
 .search-bar-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .search-bar-input-container {
     position: relative;
     text-align: center;
-    right: 20px
+    right: 20px;
 }
 
 .search-bar-button {
@@ -15,23 +16,68 @@
     top: 0;
     right: -35px;
     height: 100%;
-}
-
-
-.search-bar-input {
+    display: inline;
+    transition: all 0.3s ease-in-out;
     border: 3px solid #333;
-    border-radius: 30px;
-    width: 100%;
-    background: none;
-    font-size: 1.5rem;
-    font-weight: 400;
-    padding: 1rem;
-    text-decoration: underline;
-    font-family: "Victor Mono", monospace;
 }
 
 .search-bar-input:focus {
     outline: none;
+}
+
+.search-bar-input:hover {
+    background: #f3f3f3;
+    color: #333;
+    text-decoration: underline;
+}
+
+.search-bar-input-container:focus-within .search-bar-input {
+    outline: none;
+    transform: scale(0.9);
+}
+
+.search-bar-input-container:focus-within .search-bar-button {
+    transform: scale(0.9);
+    right: -19px;
+}
+
+.search-bar-input {
+    transition: all 0.3s ease-in-out;
+    border: 3px solid #333;
+    width: 100%;
+    border-radius: 30px;
+    background: none;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 1rem;
+    font-family: "Victor Mono", monospace;
+    background-color: #333;
+    color: #f1f1f1;
+    text-decoration: underline #757575;
+}
+
+.shake-element {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-5px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(5px);
+    }
 }
 
 @media screen and (max-width: 768px) {

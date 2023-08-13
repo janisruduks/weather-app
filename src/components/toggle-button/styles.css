@@ -10,7 +10,7 @@
 
 .menu__info {
     text-align: center;
-    padding: 1rem;
+    padding: 0.8rem;
     opacity: 0;
     transform: scaleX(0);
     transform-origin: left center;

@@ -1,3 +1,10 @@
+.button-content-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 button {
   border-radius: 30px;
   padding: 1rem;
