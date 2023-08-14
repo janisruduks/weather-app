@@ -2,11 +2,7 @@ import "./styles.css";
 import { useState } from "react";
 import Button from "../button/Button";
 
-type ToggleButtonProps = {
-    text: string | undefined | number;
-    children: React.ReactNode;
-    enable?: boolean;
-};
+import { ToggleButtonProps } from "@/types";
 
 const ToggleButton = ({ children, text, enable }: ToggleButtonProps) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

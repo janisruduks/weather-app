@@ -10,34 +10,9 @@ import Link from "next/link";
 import Button from "../button/Button";
 import ToggleButton from "../toggle-button/ToggleButton";
 import SearchBar from "../search-bar/Search-Bar";
+import { CardProps, City, CityResult, CurrentWeather, Weather } from "@/types";
 
-type CityResult = {
-    results: City[];
-};
-
-type City = {
-    name: string;
-    country: string;
-    latitude: number;
-    longitude: number;
-    country_code: string;
-    timezone: string;
-    population: number;
-    id: number;
-};
-type CurrentWeather = {
-    current_weather: Weather;
-};
-
-type Weather = {
-    temperature: number;
-    windspeed: number;
-    winddirection: number;
-    is_day: boolean;
-    time: string;
-};
-
-const Card = () => {
+const Card = ({ sendCity }: CardProps) => {
     const [cityData, setCityData] = useState<City>();
     const [weatherData, setWeatherData] = useState<Weather>();
     const [loading, setLoading] = useState<boolean>(false);
@@ -56,6 +31,7 @@ const Card = () => {
         cities.then((res) => {
             const result: CityResult = res.data;
             if (result.results === undefined) return setErrorShake(true);
+            sendCity(city);
             setCityData(result.results[0]);
             getWeather(result.results[0].latitude, result.results[0].longitude);
         });
@@ -100,8 +76,7 @@ const Card = () => {
                         <TiWeatherWindy size="1.5rem" />
                     </ToggleButton>
                 </div>
-                <hr />
-                <div className="card__content">
+                <div className="card__content box__shadow">
                     {loading ? (
                         <div>
                             <h1>Weather in {cityData?.name}</h1>
@@ -118,9 +93,9 @@ const Card = () => {
                         <p>No data availabe, search for city.</p>
                     )}
                 </div>
-                <hr />
+                <br />
                 <div className="card__content__buttons">
-                    <Button>
+                    <Button customClass="box__shadow">
                         <TbBrandGithub size="1.3rem" />
                         <Link
                             href="https://github.com/janisruduks/weather-app"
@@ -129,7 +104,7 @@ const Card = () => {
                             Star on GitHub
                         </Link>
                     </Button>
-                    <Button>
+                    <Button customClass="box__shadow">
                         <TbBrandGithub size="1.3rem" />
                         <Link
                             href="https://github.com/janisruduks?tab=repositories"

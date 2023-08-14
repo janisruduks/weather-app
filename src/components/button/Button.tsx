@@ -1,25 +1,22 @@
 import "./styles.css";
 
-type ButtonProps = {
-  children?: React.ReactNode;
-  type?: "primary" | "regular";
-  onClick?: () => void;
-  customClass?: string;
-};
+import { ButtonProps } from "@/types";
 
 const Button = ({ children, type, onClick, customClass }: ButtonProps) => {
-  return (
-    <div>
-      <button
-        className={
-          (type === "primary" ? "primary" : "secondary") + " button-content-wrapper " + customClass
-        }
-        onClick={onClick}
-      >
-        {children}
-      </button>
-    </div>
-  );
+    return (
+        <div>
+            <button
+                className={
+                    (type === "primary" ? "primary" : "secondary") +
+                    " button-content-wrapper " +
+                    customClass
+                }
+                onClick={onClick}
+            >
+                {children}
+            </button>
+        </div>
+    );
 };
 
 export default Button;

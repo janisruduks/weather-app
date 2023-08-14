@@ -1,0 +1,18 @@
+.background-wrapper {
+    width: 100%;
+    max-height: 130vh;
+    position: absolute;
+    z-index: -1;
+    background-color: #f3f3f3;
+    overflow-x: visible;
+    overflow-y: hidden;
+}
+
+.bg-text {
+    display: flex;
+    justify-content: center;
+    font-size: 4rem;
+    text-align: center;
+    color: #333;
+    text-transform: uppercase;
+}
