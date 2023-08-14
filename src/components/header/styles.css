@@ -1,0 +1,21 @@
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #333;
+    color: #f3f3f3;
+    border: 3px solid #333;
+    z-index: 1;
+    border-radius: 30px;
+    font-size: 1rem;
+}
+
+.header-wrapper a {
+    color: #f3f3f3;
+    transition: color 0.3s ease-in-out;
+}
+
+.header-wrapper a:hover {
+    color: #979797;
+}
